@@ -22,6 +22,10 @@ cover: test
 	go tool cover -html=coverage.txt
 .PHONY: cover
 
+release: clean
+	goreleaser
+.PHONY: release
+
 build:
 	go build
 .PHONY: build

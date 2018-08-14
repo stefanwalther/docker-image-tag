@@ -14,17 +14,10 @@ var (
 	password    = app.Flag("password", "Password").Short('p').Default(os.Getenv("DOCKER_PASS")).String()
 	debug       = app.Flag("debug", "Debug mode").Bool()
 
-	get      = app.Command("get", "Get a specific tag version, based on the strategy.").Default()
-	image    = get.Arg("image", "The Docker image to use").Required().String()
-	strategy = get.Flag("strategy", "Strategy to use, defaults to `latest`.").Default("latest").String()
+	get      	= app.Command("get", "Get a specific tag version, based on the strategy.").Default()
+	image    	= get.Arg("image", "The Docker image to use").Required().String()
+	strategy 	= get.Flag("strategy", "Strategy to use, defaults to `latest`.").Default("latest").String()
 )
-
-//func handleResult(items []string, err error) {
-//	failIfErrorIsNotNil(err)
-//	for _, item := range items {
-//		fmt.Printf("%s\n", item)
-//	}
-//}
 
 func failIfErrorIsNotNil(err error) {
 	if err != nil {
