@@ -24,6 +24,7 @@ cover: test
 
 release: clean
 	goreleaser
+	rm -rf ./dist
 .PHONY: release
 
 build:
