@@ -25,7 +25,7 @@ brew:
   # Reporitory to push the tap to.
   github:
     owner: stefanwalther
-    name: docker-image-tag-brew-tag
+    name: docker-image-tag-brew
 
   # Template for the url.
   # Default is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
