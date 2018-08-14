@@ -13,9 +13,9 @@ gen-readme:					## Generate README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-lint:
-
-.PHONY: lint
+clean:
+	rm -rf ./dist
+.PHONY: clean
 
 # Run all the tests and opens the coverage report
 cover: test

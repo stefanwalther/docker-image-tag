@@ -1,6 +1,6 @@
 # docker-image-tag
 
-> CLI tool to search for tags in Docker images.
+> CLI tool to search for tags in Docker images (using Docker Registry v2).
 
 [![CircleCI](https://img.shields.io/circleci/project/github/stefanwalther/docker-image-tag.svg?logo=circleci)](https://circleci.com/gh/stefanwalther/docker-image-tag/tree/master)
 
@@ -17,9 +17,13 @@ Think of the following use-cases:
 
 ## Installation
 
-```
+Go version 1.1 or higher is required. Install or update using the go get command:
+
+```shell
 $ go get stefanwalther/docker-image-tag
 ```
+
+Or download one of the [releases](https://github.com/stefanwalther/docker-image-tag/releases)
 
 ## Usage
 
@@ -73,7 +77,7 @@ $ docker-image-tag repo/image --strategy oldest
 * [stefanwalther.io](https://stefanwalther.io)
 
 ### Contributing
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/stefanwalther/docker-image-tagsearch/issues). The process for contributing is outlined below:
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/stefanwalther/docker-image-tag/issues). The process for contributing is outlined below:
 
 1. Create a fork of the project
 2. Work on whatever bug or feature you wish
