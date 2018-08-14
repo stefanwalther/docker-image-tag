@@ -1,21 +1,21 @@
 package main
 
 import (
+	"reflect"
 	"strings"
 	"testing"
-	"reflect"
 )
 
 func TestParseBearer(t *testing.T) {
 
-	input := []string {
+	input := []string{
 		"Bearer realm=\"https://auth.docker.io/token\",service=\"registry.docker.io\",scope=\"repository:foo/bar:pull\"",
 	}
 
-	expected := map[string]string {
-		"realm": "https://auth.docker.io/token",
+	expected := map[string]string{
+		"realm":   "https://auth.docker.io/token",
 		"service": "registry.docker.io",
-		"scope": "repository:foo/bar:pull",
+		"scope":   "repository:foo/bar:pull",
 	}
 
 	r := parseBearer(input)
@@ -23,6 +23,15 @@ func TestParseBearer(t *testing.T) {
 		t.Errorf("Parsing the bearer does not return the expected result.\nExpected: %v\nResult:%v", expected, r)
 	}
 
+}
+
+func TestFixOfficialRepos(t *testing.T) {
+	input := "foo"
+	expected := "library/foo"
+	r := fixOfficialRepos(input)
+	if r != expected {
+		t.Errorf("The expected result for official repos does not match.\nExpected: %v\nResult: %v", expected, r)
+	}
 }
 
 func TestGetRepoUrl(t *testing.T) {
@@ -35,13 +44,15 @@ func TestGetRepoUrl(t *testing.T) {
 			repositoryUrl string
 			repo          string
 			endpoint      string
+			expected      string
 		}{
-			{repoUrl, "foo/bar", "tags/list"},
-			{repoUrl, "foo/bar", "/tags/list"},
-			{repoUrl, "foo/bar", "tags/list"},
-			{repoUrl, "foo/bar", "tags/list/"},
-			{repoUrl, "foo/bar/", "/tags/list"},
-			{repoUrl, "/foo/bar", "/tags/list"},
+			{repoUrl, "foo/bar", "tags/list", result},
+			{repoUrl, "foo/bar", "/tags/list", result},
+			{repoUrl, "foo/bar", "tags/list", result},
+			{repoUrl, "foo/bar", "tags/list/", result},
+			{repoUrl, "foo/bar/", "/tags/list", result},
+			{repoUrl, "/foo/bar", "/tags/list", result},
+			{repoUrl, "foo", "/tags/list", "https://index.docker.io/v2/library/foo/tags/list/"},
 		}
 
 	for _, table := range tables {
@@ -51,9 +62,8 @@ func TestGetRepoUrl(t *testing.T) {
 			Endpoint:      table.endpoint,
 		}
 		r := getRepoUrl(&rq)
-		if strings.Compare(result, r) != 0 {
-			t.Errorf("Resulting Url (%v) does not match expected result (%v)", r, result)
+		if strings.Compare(r, table.expected) != 0 {
+			t.Errorf("Resulting Url does not match expected result:\nInput:\t\t\t\t%v\nExpected result:\t%v\nResult:\t\t\t\t%v", table.repo, table.expected, r)
 		}
 	}
-
 }

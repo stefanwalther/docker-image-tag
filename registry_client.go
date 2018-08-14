@@ -40,6 +40,7 @@ type RepositoryRequest struct {
 	Endpoint      string
 }
 
+// Removes any "/" prefix & suffix from the given string.
 func fixSuffixPrefix(s string) string {
 
 	sep := "/"
@@ -51,11 +52,21 @@ func fixSuffixPrefix(s string) string {
 	return s
 }
 
+// Official Docker repos run under the "_" user, so make sure that if a given repo doesn't contain a "/", then "_/" needs to be added to the repo name.
+// Example:
+// input: mongo => _/mongo
+func fixOfficialRepos(s string) string {
+	if !strings.Contains(s, "/") {
+		return "library/" + s
+	}
+	return s
+}
+
 func getRepoUrl(repository *RepositoryRequest) string {
 	var out string
-	out += fixSuffixPrefix(*repository.RepositoryUrl)
-	out += fixSuffixPrefix(*repository.Repo)
-	out += fixSuffixPrefix(repository.Endpoint)
+	out += fixSuffixPrefix(*repository.RepositoryUrl)          //https://index.docker.io/v2/
+	out += fixSuffixPrefix(fixOfficialRepos(*repository.Repo)) // "_/mongo/" or "foo/bar/"
+	out += fixSuffixPrefix(repository.Endpoint)                // "tags/list/
 	return out
 }
 
