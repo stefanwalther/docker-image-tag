@@ -18,3 +18,75 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+# .goreleaser.yml
+brew:
+  name: myproject
+
+  # Reporitory to push the tap to.
+  github:
+    owner: stefanwalther
+    name: docker-image-tag-brew-tag
+
+  # Template for the url.
+  # Default is "https://github.com/<repo_owner>/<repo_name>/releases/download/{{ .Tag }}/{{ .ArtifactName }}"
+  url_template: "http://github.mycompany.com/stefanwalther/docker-image-tag/releases/{{ .Tag }}/{{ .ArtifactName }}"
+
+  # Allows you to set a custom download strategy.
+  # Default is empty.
+  download_strategy: GitHubPrivateRepositoryReleaseDownloadStrategy
+
+  # Git author used to commit to the repository.
+  # Defaults are shown.
+  commit_author:
+    name: stefanwalther
+    email: stefan@walthers.me
+
+  # Folder inside the repository to put the formula.
+  # Default is the root folder.
+  folder: Formula
+
+  # Caveats for the user of your binary.
+  # Default is empty.
+  caveats: "How to use this binary"
+
+  # Your app's homepage.
+  # Default is empty.
+  homepage: "https://github.com/stefanwalther/"
+
+  # Your app's description.
+  # Default is empty.
+  description: "CLI tool to search for tags in Docker images (using Docker Registry v2)."
+
+  # Setting this will prevent goreleaser to actually try to commit the updated
+  # formula - instead, the formula file will be stored on the dist folder only,
+  # leaving the responsibility of publishing it to the user.
+  # Default is false.
+  skip_upload: false
+
+  # Packages your package depends on.
+  #dependencies:
+  #- git
+  #- zsh
+
+  # Packages that conflict with your package.
+  #conflicts:
+  #- svn
+  #- bash
+
+  # Specify for packages that run as a service.
+  # Default is empty.
+  #plist: |
+  #  <?xml version="1.0" encoding="UTF-8"?>
+  #  ...
+
+  # So you can `brew test` your formula.
+  # Default is empty.
+  #test: |
+  #  system "#{bin}/program --version"
+  #  ...
+
+  # Custom install script for brew.
+  # Default is 'bin.install "program"'.
+  #install: |
+  #  bin.install "program"
+  #  ...
