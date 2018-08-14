@@ -18,11 +18,9 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
-# .goreleaser.yml
 brew:
-  name: myproject
+  name: docker-image-tag
 
-  # Reporitory to push the tap to.
   github:
     owner: stefanwalther
     name: homebrew-docker-image-tag
@@ -43,11 +41,11 @@ brew:
 
   # Folder inside the repository to put the formula.
   # Default is the root folder.
-  folder: Formula
+  #folder: Formula
 
   # Caveats for the user of your binary.
   # Default is empty.
-  caveats: "How to use this binary"
+  #caveats: "How to use this binary"
 
   # Your app's homepage.
   # Default is empty.
@@ -61,7 +59,7 @@ brew:
   # formula - instead, the formula file will be stored on the dist folder only,
   # leaving the responsibility of publishing it to the user.
   # Default is false.
-  skip_upload: false
+  #skip_upload: false
 
   # Packages your package depends on.
   #dependencies:
