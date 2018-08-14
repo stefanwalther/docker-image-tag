@@ -3,7 +3,27 @@ package main
 import (
 	"strings"
 	"testing"
+	"reflect"
 )
+
+func TestParseBearer(t *testing.T) {
+
+	input := []string {
+		"Bearer realm=\"https://auth.docker.io/token\",service=\"registry.docker.io\",scope=\"repository:foo/bar:pull\"",
+	}
+
+	expected := map[string]string {
+		"realm": "https://auth.docker.io/token",
+		"service": "registry.docker.io",
+		"scope": "repository:foo/bar:pull",
+	}
+
+	r := parseBearer(input)
+	if !reflect.DeepEqual(r, expected) {
+		t.Errorf("Parsing the bearer does not return the expected result.\nExpected: %v\nResult:%v", expected, r)
+	}
+
+}
 
 func TestGetRepoUrl(t *testing.T) {
 
