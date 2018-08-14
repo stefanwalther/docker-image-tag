@@ -1,0 +1,16 @@
+# =========================
+# Project specific
+# =========================
+coverage.txt
+docker-image-tag
+dist
+
+# =========================
+# IDEs
+# =========================
+
+# IntelliJ / Webstorm
+.idea/
+
+# Visual Code
+.vscode/

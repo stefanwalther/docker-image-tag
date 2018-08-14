@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    working_directory: /go/src/github.com/stefanwalther/docker-image-tag
+    docker:
+      - image: circleci/golang:1.10.3
+    environment:
+      TEST_RESULTS: /tmp/test-results
+    steps:
+      - checkout
+      - run: make test
+
