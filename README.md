@@ -9,6 +9,7 @@
 ## Motivation
 
 _docker-image-tag_ is a CLI tool which helps you to search for **tags in Docker images**.  
+
 Think of the following use-cases:
 
 - [x] You want to find the `latest`, `oldest` release.
@@ -23,7 +24,13 @@ Go version 1.1 or higher is required. Install or update using the go get command
 $ go get stefanwalther/docker-image-tag
 ```
 
-Or download one of the [releases](https://github.com/stefanwalther/docker-image-tag/releases)
+Using brew:
+```shell
+$ brew tap stefanwalther/homebrew-docker-image-tag
+$ brew install docker-image-tag
+```
+
+Or download one of the [releases](https://github.com/stefanwalther/docker-image-tag/releases).
 
 ## Usage
 
@@ -43,7 +50,7 @@ Instead of passing `username` and `password`, _docker-image-tag_ will also use t
 Let's assume there is Docker image with several tags:
 
 ```
-Docker image: foo/bar
+Docker image: repo/image
 
 Tags:
 11.150.0
