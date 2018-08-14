@@ -70,6 +70,8 @@ func getRepoUrl(repository *RepositoryRequest) string {
 	return out
 }
 
+// Todo: Raise errors
+// Todo: Test cov
 func getTags(repository *RepositoryRequest) []string {
 	request := gorequest.New()
 
