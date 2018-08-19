@@ -9,4 +9,8 @@ jobs:
     steps:
       - checkout
       - run: make test
+      - run:
+          name: "CodeCov upload"
+          command: bash <(curl -s https://codecov.io/bash)
+
 

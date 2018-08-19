@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/alecthomas/kingpin.v2"
 	"os"
-	"strings"
+
+	"gopkg.in/alecthomas/kingpin.v2"
+	"sort"
+	"github.com/Masterminds/semver"
 )
 
 var (
@@ -21,15 +23,8 @@ var (
 
 	list		= app.Command("list", "List all tags")
 	listImage = list.Arg("image", "The Docker image to use.").Required().String()
-	listSortOrder = list.Flag("order", "The sort order, `asc` or `desc`, defaults to `asc`.").String()
+	listSortOrder = list.Flag("order", "The sort order, `asc` or `desc`, defaults to `desc`.").Default("desc").String()
 )
-
-func failIfErrorIsNotNil(err error) {
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "%s\n", err.Error())
-		os.Exit(1)
-	}
-}
 
 func main() {
 
@@ -54,9 +49,12 @@ func main() {
 	case list.FullCommand():
 		repository.Repo = listImage
 		tags := getTags(&repository)
-		//if *listSortOrder == "desc" {
-		//	sort.Sort(sort.Reverse(tags))
-		//}
-		fmt.Printf(strings.Join(tags, "\n") + "\n")
+		semverTags, _, _ := tags2SemVer(tags)
+		if *listSortOrder == "desc" {
+			sort.Sort(sort.Reverse(semver.Collection(semverTags)))
+		}
+		for _, t := range semverTags {
+			fmt.Printf("%v\n", t)
+		}
 	}
 }
