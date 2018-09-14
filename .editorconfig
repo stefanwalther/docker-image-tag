@@ -15,7 +15,7 @@ insert_final_newline = false
 
 [*.go]
 indent_style = tab
-indent_size = 4
+indent_size = 2
 
 [**/{actual,fixtures,expected}/**]
 trim_trailing_whitespace = false
