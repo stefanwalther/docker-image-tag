@@ -13,7 +13,7 @@ gen-readme:					## Generate README.md (using docker-verb)
 	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
 .PHONY: gen-readme
 
-clean:
+clean:							## Clean up the release directory
 	rm -rf ./dist
 .PHONY: clean
 
@@ -22,21 +22,21 @@ cover: test
 	go tool cover -html=coverage.txt
 .PHONY: cover
 
-release: clean
+release: clean			## Build a release
 	goreleaser
 	rm -rf ./dist
 .PHONY: release
 
-build:
+build:							## Build
 	go build
 .PHONY: build
 
+build_release:
+	./scripts/build_release.sh
+.PHONY: build_release
+
 ci: build test
 .PHONY: ci
-
-run: build
-	./scripts/run.sh
-.PHONY: run
 
 # Run all the tests
 test:
