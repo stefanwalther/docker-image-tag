@@ -2,19 +2,14 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"strings"
-
 	"github.com/Masterminds/semver"
 	"gopkg.in/alecthomas/kingpin.v2"
+	"os"
 	"sort"
 )
 
 var (
-	buildInfo    string
-	buildStamp   = "No BuildStamp provided"
-	buildGitHash = "No GitHash provided"
-	buildVersion = "No Version provided"
+	buildVersion    string
 )
 
 var (
@@ -37,15 +32,6 @@ var (
 )
 
 func main() {
-
-	if buildInfo != "" {
-		parts := strings.Split(buildInfo, "|")
-		if len(parts) >= 3 {
-			buildStamp = parts[0]
-			buildGitHash = parts[1]
-			buildVersion = parts[2]
-		}
-	}
 
 	repository := RepositoryRequest{
 		RepositoryUrl: registryUrl,
