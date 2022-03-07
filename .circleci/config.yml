@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: /go/src/github.com/stefanwalther/docker-image-tag
     docker:
-      - image: circleci/golang:1.12.7
+      - image: circleci/golang:1.17.5
     environment:
       TEST_RESULTS: /tmp/test-results
     steps:
