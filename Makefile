@@ -9,10 +9,6 @@ help:								## Show this help.
 	@echo ''
 .PHONY: help
 
-gen-readme:					## Generate README.md (using docker-verb)
-	docker run --rm -v ${PWD}:/opt/verb stefanwalther/verb
-.PHONY: gen-readme
-
 clean:							## Clean up the release directory
 	rm -rf ./dist
 .PHONY: clean
